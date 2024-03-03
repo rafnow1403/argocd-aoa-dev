@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: secudoc
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: cka-exam
+    server: https://kubernetes.default.svc
+  project: development
+  source:
+    path: k8s
+    repoURL: git@github.com:rafnow1403/secudoc.git
+    targetRevision: main
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
